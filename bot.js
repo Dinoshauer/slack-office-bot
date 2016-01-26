@@ -105,7 +105,6 @@ controller.hears(
           callback: function(response, convo) {
             try {
               helpers.saveClientSecret(
-                client,
                 JSON.parse(response.text.replace(/<|>/g, '')),
                 function (err, res) {
                   if (err) {
