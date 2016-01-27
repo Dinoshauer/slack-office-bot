@@ -5,5 +5,9 @@ Authorizes with google's calendar api and finds your next event.
 
 Features lots of nasty hacks and terrible ways to do things.
 
-Bugs:
-* No idea why the bot responds twice on `'(where|when) is my next meeting\??'` - Asked in slack4dev.slack.com, no answer yet.
+Required env vars:
+
+* `SLACK_API_KEY`
+* `GOOGLE_CLIENT_SECRET`
+* `GOOGLE_CLIENT_ID`
+* `GOOGLE_REDIRECT_URLS` (seperate urls with `|`)
