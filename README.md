@@ -11,3 +11,12 @@ Required env vars:
 * `GOOGLE_CLIENT_SECRET`
 * `GOOGLE_CLIENT_ID`
 * `GOOGLE_REDIRECT_URLS` (seperate urls with `|`)
+
+Example:
+
+
+    k [19:47]
+    where is my next meeting?
+
+    office-bot [19:47]
+    It is @ ​*Some meeting room*​ in 12 minutes - Summary: Blast shields
