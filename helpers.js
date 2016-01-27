@@ -48,23 +48,23 @@ function _authorize (userAuth, cb) {
   );
 }
 
-function _getUserAuth (email, cb) {
-  client.get('auth:' + email, cb);
+function _getUserAuth (userId, cb) {
+  client.get('auth:' + userId, cb);
 }
 
-function _saveUserAuth (email, token, cb) {
-  client.set('auth:' + email, JSON.stringify(token), cb);
+function _saveUserAuth (userId, token, cb) {
+  client.set('auth:' + userId, JSON.stringify(token), cb);
 }
 
 module.exports = {
   saveClientSecret: function (contents, cb) {
     client.set('client_secret', JSON.stringify(contents), cb);
   },
-  userIsSaved: function (email, cb) {
-    client.get('auth:' + email, cb);
+  userIsSaved: function (userId, cb) {
+    client.get('auth:' + userId, cb);
   },
-  getNextMeeting: function (email, cb) {
-    _getUserAuth(email, function (err, userAuth) {
+  getNextMeeting: function (userId, cb) {
+    _getUserAuth(userId, function (err, userAuth) {
       _authorize(userAuth, function (err, auth) {
         var calendar = google.calendar('v3');
         calendar.events.list({
@@ -81,7 +81,7 @@ module.exports = {
   getAuthUrl: function (cb) {
     _authorize(null, cb);
   },
-  saveToken: function (email, code, cb) {
+  saveToken: function (userId, code, cb) {
     _authorize(null, function (err, oauth2Client) {
       oauth2Client.getToken(code, function (err, token) {
         if (err) {
@@ -89,7 +89,7 @@ module.exports = {
           return cb(err);
         }
         oauth2Client.credentials = token;
-        _saveUserAuth(email, token, cb);
+        _saveUserAuth(userId, token, cb);
       });
     });
   }

@@ -29,8 +29,8 @@ controller.hears(
   ['(where|when) is my next meeting\??'],
   ['direct_message', 'direct_mention', 'mention', 'ambient'],
   function (bot, message) {
-    var email = message.user;
-    helpers.userIsSaved(email, function (err, res) {
+    var userId = message.user;
+    helpers.userIsSaved(userId, function (err, res) {
       if (err) {
         return bot.reply(message, 'Something happened when I was looking for your details :(');
       }
@@ -39,7 +39,7 @@ controller.hears(
           return bot.reply(message, 'I don\'t have your details yet, please authorize by going to this url: ' + url + '\nThen PM me with the following message: "Here is my token: <token>"');
         });
       }
-      helpers.getNextMeeting(email, function (err, res) {
+      helpers.getNextMeeting(userId, function (err, res) {
         if (err) {
           return bot.reply(message, 'Something happened when I was looking for your meeting :(');
         }
@@ -65,8 +65,8 @@ controller.hears(
   ['direct_message'],
   function (bot, message) {
     var code = message.match[1];
-    var email = message.user;
-    helpers.saveToken(email, code, function (err, res) {
+    var userId = message.user;
+    helpers.saveToken(userId, code, function (err, res) {
       if (err) {
         return bot.reply(message, err.toString());
       }
